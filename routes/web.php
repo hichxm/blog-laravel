@@ -19,6 +19,8 @@ Route::get('/', function () {
 })->name('welcome');
 
 
+Route::post('logout', 'Auth\LogoutController')->name('logout');
+
 Route::group([
     'middleware' => [
         RedirectIfAuthenticated::class
