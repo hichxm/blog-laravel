@@ -17,5 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
+Route::view('/register', 'register')->name('register');
+
 Route::post('/login', 'Auth\LoginController')->name('login');
 Route::post('/register', 'Auth\RegisterController')->name('register');
