@@ -21,6 +21,10 @@ class LoginController extends Controller
         if ($auth) {
             redirect(route('welcome'));
         }
+
+        return back()->withErrors([
+            'credential' => 'CREDENTIAL: ERROR'
+        ]);
     }
 
 }

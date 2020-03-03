@@ -48,4 +48,20 @@ class LoginTest extends TestCase
         $this->assertAuthenticated();
     }
 
+    /** @test */
+    public function check_if_user_is_not_authentified_with_bad_credential()
+    {
+        $this->assertNotAuthenticated();
+
+        $this->post(route('web.login'), [
+            'login' => 'bad_username',
+            'password' => 'bad_password'
+        ])
+            ->assertSessionHasErrors([
+                'credential'
+            ]);
+
+        $this->assertNotAuthenticated();
+    }
+
 }
