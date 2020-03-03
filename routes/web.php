@@ -18,3 +18,4 @@ Route::get('/', function () {
 });
 
 Route::post('/login', 'Auth\LoginController')->name('login');
+Route::post('/register', 'Auth\RegisterController')->name('register');

@@ -25,6 +25,23 @@ abstract class TestCase extends BaseTestCase
     }
 
     /**
+     * Assert that the model count
+     *
+     * @param int $count
+     * @param Model $model
+     * @return $this
+     */
+    public function assertModelCount(int $count, $model)
+    {
+        /** @var Model $instanciedModel */
+        $instanciedModel = app($model);
+
+        $this->assertCount($count, $instanciedModel->all(), "The model count {$instanciedModel->count()} != {$count}");
+
+        return $this;
+    }
+
+    /**
      * Assert that the model is empty
      *
      * @param Model $model
@@ -35,7 +52,7 @@ abstract class TestCase extends BaseTestCase
         /** @var Model $instanciedModel */
         $instanciedModel = app($model);
 
-        $this->assertEmpty($instanciedModel->all(), "The model {$instanciedModel->getTable()} is empty ");
+        $this->assertEmpty($instanciedModel->all(), "The model {$instanciedModel->getTable()} is not empty ");
 
         return $this;
     }
@@ -51,7 +68,7 @@ abstract class TestCase extends BaseTestCase
         /** @var Model $instanciedModel */
         $instanciedModel = app($model);
 
-        $this->assertNotEmpty($instanciedModel->all(), "The model {$instanciedModel->getTable()} is not empty ");
+        $this->assertNotEmpty($instanciedModel->all(), "The model {$instanciedModel->getTable()} is empty ");
 
         return $this;
     }
