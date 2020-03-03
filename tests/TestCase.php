@@ -3,6 +3,7 @@
 namespace Tests;
 
 use App\User;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
 abstract class TestCase extends BaseTestCase
@@ -24,15 +25,47 @@ abstract class TestCase extends BaseTestCase
     }
 
     /**
+     * Assert that the model is empty
+     *
+     * @param Model $model
+     * @return $this
+     */
+    public function assertModelIsEmpty($model)
+    {
+        /** @var Model $instanciedModel */
+        $instanciedModel = app($model);
+
+        $this->assertEmpty($instanciedModel->all(), "The model {$instanciedModel->getTable()} is empty ");
+
+        return $this;
+    }
+
+    /**
+     * Assert that the model is not empty
+     *
+     * @param Model $model
+     * @return $this
+     */
+    public function assertModelIsNotEmpty($model)
+    {
+        /** @var Model $instanciedModel */
+        $instanciedModel = app($model);
+
+        $this->assertNotEmpty($instanciedModel->all(), "The model {$instanciedModel->getTable()} is not empty ");
+
+        return $this;
+    }
+
+    /**
      * Generate new user(s)
      *
      * @param array $data
      * @param integer $count
      * @return User[]|User
      */
-    protected function createUser($data = [], $count = 1)
+    protected function createUser($data = [], $count = null)
     {
-        if (!is_null($data['password']))
+        if (!empty($data['password']))
             $data['password'] = bcrypt($data['password']);
 
         return factory(User::class, $count)->create($data);
