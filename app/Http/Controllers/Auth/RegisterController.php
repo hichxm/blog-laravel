@@ -14,6 +14,8 @@ class RegisterController extends Controller
         $user = User::create($request->toArray());
 
         auth()->login($user);
+
+        return redirect(route('web.welcome'));
     }
 
 }

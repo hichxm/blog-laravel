@@ -77,4 +77,19 @@ class LoginTest extends TestCase
         $this->assertNotAuthenticated();
     }
 
+    /** @test */
+    public function check_if_user_is_redirected()
+    {
+        $this->createUser([
+            'username' => 'hichxm',
+            'password' => 'Hichxm123456'
+        ]);
+
+        $this->post(route('web.login'), [
+            'login' => 'hichxm',
+            'password' => 'Hichxm123456'
+        ])
+            ->assertRedirect(route('web.welcome'));
+    }
+
 }

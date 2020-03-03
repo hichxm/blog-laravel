@@ -20,7 +20,7 @@ class LoginController extends Controller
         $auth = auth()->attempt($credential);
 
         if ($auth) {
-            return redirect(route('welcome'));
+            return redirect(route('web.welcome'));
         }
 
         return back()->withErrors([
