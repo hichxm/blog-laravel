@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
 
-    public function __invoke(Request $request)
+    public function __invoke(LoginRequest $request)
     {
         $login = $request->input('login');
         $loginType = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
@@ -19,7 +20,7 @@ class LoginController extends Controller
         $auth = auth()->attempt($credential);
 
         if ($auth) {
-            redirect(route('welcome'));
+            return redirect(route('welcome'));
         }
 
         return back()->withErrors([
