@@ -94,4 +94,20 @@ class RegisterTest extends TestCase
         ])
             ->assertRedirect(route('web.welcome'));
     }
+
+    /** @test */
+    public function check_if_connected_user_as_redirect_in_register_route()
+    {
+        $this->post(route('web.register'), [
+            'username' => 'hichxm',
+            'email' => 'hicham.slimani.fr@gmail.com',
+            'password' => 'Hichxm123456',
+            'password_confirmation' => 'Hichxm123456',
+        ]);
+
+        $this->assertAuthenticated();
+
+        $this->get(route('web.register'))
+            ->assertRedirect(route('web.welcome'));
+    }
 }

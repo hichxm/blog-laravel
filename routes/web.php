@@ -11,13 +11,22 @@
 |
 */
 
+use App\Http\Middleware\RedirectIfAuthenticated;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-Route::view('/register', 'register')->name('register');
 
-Route::post('/login', 'Auth\LoginController')->name('login');
-Route::post('/register', 'Auth\RegisterController')->name('register');
+Route::group([
+    'middleware' => [
+        RedirectIfAuthenticated::class
+        ]
+    ], function () {
+        Route::view('/register', 'register')->name('register');
+        Route::post('/register', 'Auth\RegisterController')->name('register');
+
+        Route::view('/login', 'login');
+        Route::post('/login', 'Auth\LoginController')->name('login');
+});

@@ -92,4 +92,23 @@ class LoginTest extends TestCase
             ->assertRedirect(route('web.welcome'));
     }
 
+    /** @test */
+    public function check_if_connected_user_as_redirect_in_logins_route()
+    {
+        $this->createUser([
+            'username' => 'hichxm',
+            'password' => 'Hichxm123456'
+        ]);
+
+        $this->post(route('web.login'), [
+            'login' => 'hichxm',
+            'password' => 'Hichxm123456'
+        ]);
+
+        $this->assertAuthenticated();
+
+        $this->get(route('web.login'))
+            ->assertRedirect(route('web.welcome'));
+    }
+
 }
