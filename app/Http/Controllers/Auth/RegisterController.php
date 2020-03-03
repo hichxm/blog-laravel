@@ -11,7 +11,9 @@ class RegisterController extends Controller
 
     public function __invoke(RegisterRequest $request)
     {
-        $user = User::create($request->toArray());
+        $user = User::create($request->merge([
+            'password' => bcrypt($request->get('password')),
+        ])->toArray());
 
         auth()->login($user);
 

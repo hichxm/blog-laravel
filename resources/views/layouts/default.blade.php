@@ -24,7 +24,7 @@
                     <li class="nav-item">
                         <form action="{{ route('web.logout') }}" method="POST">
                             @csrf
-                            <button type="submit" class="nav-link">Déconnexion</button>
+                            <button type="submit" class="btn btn-outline-secondary">Déconnexion</button>
                         </form>
                     </li>
                     @else
