@@ -67,4 +67,19 @@ class RegisterTest extends TestCase
         $this->assertModelCount(1, User::class);
     }
 
+    /** @test */
+    public function check_if_user_is_registred_and_connected()
+    {
+
+        $this->assertNotAuthenticated();
+
+        $this->post(route('web.register'), [
+            'username' => 'hichxm',
+            'email' => 'hicham.slimani.fr@gmail.com',
+            'password' => 'Hichxm123456',
+            'password_confirmation' => 'Hichxm123456',
+        ]);
+
+        $this->assertAuthenticated();
+    }
 }
