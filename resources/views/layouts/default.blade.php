@@ -20,9 +20,21 @@
 
             <div class="collapse navbar-collapse" id="navbar">
                 <ul class="navbar-nav ml-auto">
+                    @auth
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Connexion</a>
+                        <form action="{{ route('web.logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="nav-link">Déconnexion</button>
+                        </form>
                     </li>
+                    @else
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('web.login') }}">Connexion</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('web.register') }}">Inscription</a>
+                    </li>
+                    @endauth
                 </ul>
             </div>
         </nav>

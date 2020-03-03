@@ -111,4 +111,16 @@ class LoginTest extends TestCase
             ->assertRedirect(route('web.welcome'));
     }
 
+    /** @test */
+    public function check_if_connected_with_bad_credential()
+    {
+        $this->post(route('web.login'), [
+            'login' => 'hichxm',
+            'password' => 'Hichxm123456'
+        ])
+            ->assertSessionHasErrors([
+                'credential',
+            ]);
+    }
+
 }

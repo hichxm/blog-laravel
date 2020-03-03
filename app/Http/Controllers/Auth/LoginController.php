@@ -25,7 +25,7 @@ class LoginController extends Controller
 
         return back()->withErrors([
             'credential' => 'CREDENTIAL: ERROR'
-        ]);
+        ])->withInput();
     }
 
 }

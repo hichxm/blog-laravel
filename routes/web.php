@@ -24,11 +24,11 @@ Route::post('logout', 'Auth\LogoutController')->name('logout');
 Route::group([
     'middleware' => [
         RedirectIfAuthenticated::class
-        ]
-    ], function () {
-        Route::view('/register', 'register')->name('register');
-        Route::post('/register', 'Auth\RegisterController')->name('register');
+    ]
+], function () {
+    Route::view('/register', 'register')->name('register');
+    Route::post('/register', 'Auth\RegisterController')->name('register');
 
-        Route::view('/login', 'login');
-        Route::post('/login', 'Auth\LoginController')->name('login');
+    Route::view('/login', 'login')->name('login');
+    Route::post('/login', 'Auth\LoginController')->name('login');
 });
