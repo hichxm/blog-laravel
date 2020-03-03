@@ -23,7 +23,25 @@ class LoginTest extends TestCase
         $this->assertNotAuthenticated();
 
         $this->post(route('web.login'), [
-            'username' => 'hichxm',
+            'login' => 'hichxm',
+            'password' => 'Hichxm123456'
+        ]);
+
+        $this->assertAuthenticated();
+    }
+
+    /** @test */
+    public function check_if_user_is_authentified_with_email_adresse()
+    {
+        $this->createUser([
+            'email' => 'hicham.slimani.fr@gmail.com',
+            'password' => 'Hichxm123456'
+        ]);
+
+        $this->assertNotAuthenticated();
+
+        $this->post(route('web.login'), [
+            'login' => 'hicham.slimani.fr@gmail.com',
             'password' => 'Hichxm123456'
         ]);
 
