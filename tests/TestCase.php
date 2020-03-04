@@ -87,4 +87,15 @@ abstract class TestCase extends BaseTestCase
 
         return factory(User::class, $count)->create($data);
     }
+
+    /**
+     * Connect user
+     *
+     * @param $user
+     * @return void
+     */
+    protected function connectUser($user)
+    {
+        auth()->loginUsingId($user->id);
+    }
 }
