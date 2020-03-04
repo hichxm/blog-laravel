@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostDestroyRequest;
 use App\Http\Requests\PostRequest;
 use App\Post;
 use Illuminate\Http\Request;
@@ -84,8 +85,10 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy(PostDestroyRequest $request, $slug, Post $post)
     {
-        //
+        $post->delete();
+
+        return redirect(route('web.post.index'));
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Tests;
 
+use App\Post;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
@@ -86,6 +87,13 @@ abstract class TestCase extends BaseTestCase
             $data['password'] = bcrypt($data['password']);
 
         return factory(User::class, $count)->create($data);
+    }
+
+    protected function createPost($user, $data = [], $count = null)
+    {
+        return factory(Post::class, $count)->create(array_merge([
+            'user_id' => $user->id
+        ], $data));
     }
 
     /**

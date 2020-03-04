@@ -21,13 +21,20 @@ Route::get('/', function () {
 
 Route::post('logout', 'Auth\LogoutController')->name('logout');
 
-Route::get('post/{slug}-{post}')->name('post.show');
-Route::delete('post/{slug}-{post}')->name('post.destroy');
-Route::patch('post/{slug}-{post}')->name('post.update');
-Route::get('post/{slug}-{post}/edit')->name('post.edit');
-Route::resource('post', 'PostController')->except([
-    'show', 'edit', 'update', 'destroy'
-]);
+Route::group([
+    'where' => [
+        'slug' => '[a-zA-Z0-9\-]+',
+        'post' => '[0-9]+',
+    ]
+], function () {
+    Route::get('post/{slug}-{post}')->name('post.show');
+    Route::delete('post/{slug}-{post}', 'PostController@destroy')->name('post.destroy');
+    Route::patch('post/{slug}-{post}')->name('post.update');
+    Route::get('post/{slug}-{post}/edit')->name('post.edit');
+    Route::resource('post', 'PostController')->except([
+        'show', 'edit', 'update', 'destroy'
+    ]);
+});
 
 
 Route::group([
