@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PostDestroyRequest;
 use App\Http\Requests\PostRequest;
+use App\Http\Requests\PostUpdateRequest;
 use App\Post;
 use Illuminate\Http\Request;
 
@@ -74,9 +75,16 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(PostUpdateRequest $request, $slug, Post $post)
     {
-        //
+        $post->update($request->only([
+            'title', 'content'
+        ]));
+
+        return redirect(route('web.post.show', [
+            'slug' => $post->slug,
+            'post' => $post->id,
+        ]));
     }
 
     /**

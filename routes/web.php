@@ -29,7 +29,7 @@ Route::group([
 ], function () {
     Route::get('post/{slug}-{post}')->name('post.show');
     Route::delete('post/{slug}-{post}', 'PostController@destroy')->name('post.destroy');
-    Route::patch('post/{slug}-{post}')->name('post.update');
+    Route::patch('post/{slug}-{post}', 'PostController@update')->name('post.update');
     Route::get('post/{slug}-{post}/edit')->name('post.edit');
     Route::resource('post', 'PostController')->except([
         'show', 'edit', 'update', 'destroy'
