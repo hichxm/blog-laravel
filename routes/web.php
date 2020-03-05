@@ -27,7 +27,7 @@ Route::group([
         'post' => '[0-9]+',
     ]
 ], function () {
-    Route::get('post/{slug}-{post}')->name('post.show');
+    Route::get('post/{slug}-{post}', 'PostController@show')->name('post.show');
     Route::delete('post/{slug}-{post}', 'PostController@destroy')->name('post.destroy');
     Route::patch('post/{slug}-{post}', 'PostController@update')->name('post.update');
     Route::get('post/{slug}-{post}/edit')->name('post.edit');
