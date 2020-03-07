@@ -7,6 +7,8 @@ use Illuminate\Support\Str;
 
 class Post extends Model
 {
+    protected $perPage = 5;
+
     protected $fillable = [
         'title', 'content', 'user_id',
     ];
@@ -14,6 +16,11 @@ class Post extends Model
     public function getSlugAttribute()
     {
         return Str::slug($this->title);
+    }
+
+    public function getShortContentAttribute()
+    {
+        return Str::limit($this->content, 150, '...');
     }
 
     public function user()
