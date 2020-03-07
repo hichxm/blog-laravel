@@ -6,6 +6,7 @@ use App\Http\Requests\PostDestroyRequest;
 use App\Http\Requests\PostRequest;
 use App\Http\Requests\PostUpdateRequest;
 use App\Post;
+use App\User;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -17,7 +18,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        return view('post.index', [
+            'posts' => Post::with('user')->latest()->paginate(),
+        ]);
     }
 
     /**
