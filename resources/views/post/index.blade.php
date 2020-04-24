@@ -4,6 +4,7 @@
 <div class="col-md-4">
 
 </div>
+
 <div class="col-md-8">
     @forelse ($posts as $post)
         <div class="card bg-light mb-3">
