@@ -14,6 +14,7 @@ class Fdgsdfgdfg extends Migration
     public function up()
     {
         Schema::create('Fdgsdfgdfg', function (Blueprint $table) {
+
         });
     }
 
